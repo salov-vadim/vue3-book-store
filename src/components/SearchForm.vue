@@ -5,7 +5,7 @@
              v-model.trim="form.searchText.value"
              @blur="form.searchText.blur"
              :class="['form-control', {'is-invalid': isInValid}]"
-             placeholder="Название книги">
+             placeholder="Название книги как дела">
       <small v-if="isInValid" class="invalid-feedback">
         Значение не может быть пустым и должно содержать минимум 2 символа
       </small>
