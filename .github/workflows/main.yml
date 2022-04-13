@@ -5,9 +5,9 @@ name: Deploy to AWS
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
+
       # Setup NodeJS in our environment
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.5.1
@@ -33,7 +33,7 @@ jobs:
         run: |
           npm install
           npm run build
-          
+
       # Syncs your 'dist' folder from buildng the Vue app with an S3 bucket
       - name: S3 Sync
         uses: jakejarvis/s3-sync-action@v0.5.1
@@ -45,7 +45,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'eu-west-3'
           SOURCE_DIR: 'dist'
-        
+
       # Clears the CloudFront cache so new requests will receive the latest version of your app
       - name: Invalidate Cloudfront
         uses: chetan/invalidate-cloudfront-action@v1.3
