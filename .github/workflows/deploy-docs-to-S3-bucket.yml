@@ -4,8 +4,8 @@ name: Deploying Docs to S3 Bucket
 
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  #push:
-   # branches: [ master ]
+  push:
+    branches: [ master ]
 
 
   # Allows you to run this workflow manually from the Actions tab
@@ -45,13 +45,4 @@ jobs:
           AWS_REGION: 'eu-west-3'
           SOURCE_DIR: 'dist'
 
-      
-      - name: Slack notification
-        uses: Ilshidur/action-slack@2.0.2
-        env:
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
-          SLACK_USERNAME: Vadim # Optional. (defaults to webhook app)
-          SLACK_CHANNEL: dev # Optional. (defaults to webhook)
-        
-        with:
-          args: 'A new commit has been pushed. ' # Optional
+ 
